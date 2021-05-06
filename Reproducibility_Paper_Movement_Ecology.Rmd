@@ -1,52 +1,89 @@
 ---
-title: 'A glimpse into the reproducibility of scientific papers in Movement Ecology:
-  How are we doing?'
-author: "Jenicca Poongavanan"
+title: 'A glimpse into the reproducibility of scientific papers in Movement Ecology: How are we doing?'
+author:
+  - Jenicca Poongavanan^[University of Florida, jpoongavanan@ufl.edu]
+  - Rocio Joo Arakawa
+  - Victoria Jane Goodall
+  - Scoot K Robinson
+  - Mathieu Basille^[University of Florida, basille@ufl.edu]
 date: "4/21/2021"
-degree: Degree
-field: Field
-department: Your Department
-uni: Utah State University
-location: Logan, UT
-chair: Mathieu Basille
-committee2: Rocio Joo Arakawa
-committee3: Victoria Jane Goodall
-committee4: Scoot K Robinson
-gradschool: University of Florida
-geometry:
-- top=1in
-- bottom=1in
-- right=1in
-- left=1.5in
-Year: '2021'
-output:
-  pdf_document:
-    latex_engine: xelatex 
-  html_document: default
+output:                         # Let's be explicit with parameters
+  bookdown::pdf_document2:
+    toc: true
+    toc_depth: 3
+    number_sections: false
+    fig_caption: true
+    latex_engine: xelatex
+  bookdown::html_document2:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: false
+    code_download: true
+    self_contained: true
+    theme: flatly
 ---
 
 
-# Abstract
+```{r setup, include = FALSE, cache = FALSE}
+
+## Chunk options
+knitr::opts_chunk$set(
+    error = FALSE, # stops on error
+    message = FALSE,
+    echo = FALSE,
+    ## Figure sizes
+    fig.width = 7,
+    fig.height = 7,
+    out.width = "75%",
+    fig.align = "center",
+    ## Code formating
+    tidy = TRUE,                   # format code nicely
+    tidy = "styler"
+    ## fig.lp = " "                   # figure label
+)
+
+## R packages (better to load them all in the first chunk)
+## library("readr")   # Not necessary with 'library("tidyverse")'
+## library("ggplot2") # Not necessary with 'library("tidyverse")'
+library("tidyverse")
+library("viridis")
+library("patchwork")
+library("fmsb")
+library("colormap")
+library("gridExtra")
+
+## I removed the following part, which breaks all installs that use regular
+## LaTeX installs, and not through tinytex (hint: most LaTeX users, whether they
+## are on Windows or Linux)
+## 
+## tinytex::install_tinytex()
+## library(tinytex)
+## options(tinytex.verbose = TRUE)
+
+```
+
+
+## Abstract
 
 #### Background
+
 Reproducibility is the earmark of science and thus Movement Ecology as well. However, studies in disciplines such as biology and geosciences have shown that published work is rarely reproducible. Ensuring reproducibility is not a mandatory part of the research process and thus there are no clear procedures in place to assess the reproducibility of scientific articles. 
 
 #### Methods
+
 In this study we put forward a reproducibility workflow scoring sheet based on six criteria that lead to successful reproducible papers. The reproducibility workflow can be used by authors to evaluate the reproducibility of their studies before publication and reviewers to evaluate the reproducibility of scientific papers. To assess the state of reproducibility in Movement Ecology, we attempted to reproduce the results from Movement Ecology papers that use behavioral pattern identification methods. We selected 75 papers published in several journals from 2010-2020. 
 
 #### Results
+
 According to our proposed reproducibility workflow, sixteen studies reflected at least some reproducibility (scores ≥ 4). In particular, we were only able to obtain the data for 16 out of 75 papers. Out of these, a minority of papers also provided code with the data (6 out of the 16 studies). Out of the 6 studies that made both data and code available, only four studies reflected a high level of reproducibility (scores ≥ 9) owing it to good code annotation and execution. 
 
 #### Conclusions
+
 Based on our findings, we proposed guidelines for authors, journals and academic institutions to enhance the state of reproducibility in Movement Ecology. 
 
-```{r, include=FALSE}
-tinytex::install_tinytex()
-library(tinytex)
-options(tinytex.verbose = TRUE)
-```
 
-# Introduction
+## Introduction
 
 *Reproducibility* is a fundamental ingredient in scientific work as it allows researchers to review and re-run studies reported by other scientists. Across different scientific fields the term ‘reproducibility’ is often used interchangeably with the term ‘replicability’, which leads to confusion (National Academies of Sciences, Engineering and Medicine, 2019). *Replicability* consists of a study arriving at the same scientific findings as another study by following the same experimental protocols and analytical methods but with new data (Barba, 2018)⁠, while reproducibility is obtaining the same results reported in a paper when using the same input data and computational steps to re-run the analysis (Patil et al., 2016)⁠. Kitzes et al. (2017)⁠ considers results to be computationally reproducible when an independent researcher is able to recreate key quantitative results using the same data and computational code (hereafter code). Generally, researchers can find it difficult to guarantee the replicability of their study but computation plays a big part in deriving results and can usually be the one thing that a researcher can guarantee about a study (Peng, 2015).
 
@@ -64,12 +101,11 @@ For a study to be reproducible, there are key criteria that need to be fulfilled
 In contrast to other studies (Archmiller et al., 2020; Konkol et al., 2019; Lewis et al., 2018) that only assessed reproducibility of the reported results, in this study we assign scores to papers based on each aforementioned criteria that encompass most sections of the manuscript. We fully evaluate the reproducibility of 75 studies published between 2010 and 2020. Our goals are to 1) establish a workflow that can be used as a tool by authors and reviewers to evaluate reproducibility in science and 2) evaluate the reproducibility status in the sub-field of Movement Ecology.
 
 
-# Methodology
+## Methodology
 
 ### Data Collection 
-To evaluate reproducibility in Movement Ecology, we first screened for some of the most popular methods used in Movement Ecology to identify animal behaviors (Table 1). The list is not considered exhaustive but portrays methods used in behavioral pattern identification reviewed by Gurarie et al. (2016)⁠ and Bennison et al. (2018)⁠. To assess popularity of each method, we first identified the article that introduced the method in ecology. The sum of the number of citations of this paper ‘Google Scholar’ and ‘Web of Science’ (collected by 2020-11-13; Table 1) was used as a proxy of popularity of the method. Based on out popularity proxy, we shortlisted four methods as being the most popular: Hidden Markov models (HMM), Behavioral Change Point Analysis (BCPA), Expectation – Maximisation binary Clustering (EMbC) and First-Passage Time (FPT). We do not review those four methods but used them as a filter to obtain a random sample of relevant papers in Movement Ecology.
 
-Table 2-1: List of behavioral pattern identification methods together with the number of times they have been cited on 'Google Scholar' and 'Web of Science' on 13th November 2020. The four selected methods for this review are highlighted in italics.
+To evaluate reproducibility in Movement Ecology, we first screened for some of the most popular methods used in Movement Ecology to identify animal behaviors (Table \@ref(tab:list-meth)). The list is not considered exhaustive but portrays methods used in behavioral pattern identification reviewed by Gurarie et al. (2016)⁠ and Bennison et al. (2018)⁠. To assess popularity of each method, we first identified the article that introduced the method in ecology. The sum of the number of citations of this paper ‘Google Scholar’ and ‘Web of Science’ (collected by 2020-11-13; Table \@ref(tab:list-meth)) was used as a proxy of popularity of the method. Based on out popularity proxy, we shortlisted four methods as being the most popular: Hidden Markov models (HMM), Behavioral Change Point Analysis (BCPA), Expectation – Maximisation binary Clustering (EMbC) and First-Passage Time (FPT). We do not review those four methods but used them as a filter to obtain a random sample of relevant papers in Movement Ecology.
 
 | Method | Paper introducing the method for behavioral identification in ecology | Year | Sum of the number of times cited in Google Scholar and Web of Science|
 | ----------- | ----------- | :------: | :-------:|
@@ -81,33 +117,44 @@ Table 2-1: List of behavioral pattern identification methods together with the n
 |Bayesian Partitioning Markov Models (BPMM)|1. Computing the likelihood of sequence segmentation under Markov modelling (Guéguen, 2009) <br> ⁠2. Segmentation by maximal predictive partitioning according to composition biases (Guéguen, 2001)| 2009  <br><br><br><br>    2001| 34 |
 | Kernel Density| Time-in-area represents foraging activity in a wide-ranging pelagic forager (Warwick-Evans et al., 2015) | 2015 | 43|
 
+Table: (\#tab:list-meth) List of behavioral pattern identification methods together with the number of times they have been cited on 'Google Scholar' and 'Web of Science' on 13th November 2020. The four selected methods for this review are highlighted in italics.
+
 Once we determined the most cited methods, we used ‘Google Scholar’ and ‘Web of Science’ as search engines to search for eligible papers to be reviewed for the reproducibility analysis. To be eligible, these papers had to 1) use one of the four selected methods to identify animal behaviors, 2) use R to execute the analysis (the most popular open source software in ecology and Movement Ecology (Rocío Joo et al., 2020; Lai et al., 2019), and 3) have a publication date from within the last 10 years (2010-2020). The date criterion was set as a primary filter on both search engines. We considered that more recent papers would have a higher chance to be reproducible because: R and other open software that provides a reproducible environment have become very popular in the ecological community, data sharing platforms (Michener, 2015)⁠ and journal demands for sharing data are also recent (Stodden et al., 2013)⁠ and half of the selected methods have only been used for animal behavior studies for less than a decade. We ultimately selected 75 papers; they were published in 46 different journals.
 
 ### A Reproducibility Workflow
-Ensuring reproducibility is not a mandatory part of the research process and thus there are no clear procedures in place to assess the reproducibility of scientific articles. Based on guidelines outlined in different scientific publications on reproducibility across several fields (National Academies of Sciences, Engineering and Medecin 2019; R. D. Peng, 2011; Piccolo & Frampton, 2016; Sandve et al., 2013)⁠, we were able to establish six criteria that lead to a successful reproducible paper. Those six criteria pertain to data availability, code availability, the use of open source software, correct execution of the code, code annotations and reproducibility of results (Fig 1). Based on these criteria we assigned scores to selected papers in order to measure how reproducible each paper was. Each criterion was rated on a scale of 2 points, for a grand total of 12 points, with 12 indicating an impeccable reproducibility standard and 0 indicating complete lack of reproducibility. We detail the scoring procedure for each criterion below. Although our focus was on the field of Movement Ecology and particularly animal behavior identification, it is important to note that our criteria are of general purpose. Any scientist seeking to make or evaluate reproducibility in research can easily adopt our workflow on other scientific works.
 
+Ensuring reproducibility is not a mandatory part of the research process and thus there are no clear procedures in place to assess the reproducibility of scientific articles. Based on guidelines outlined in different scientific publications on reproducibility across several fields (National Academies of Sciences, Engineering and Medecin 2019; R. D. Peng, 2011; Piccolo & Frampton, 2016; Sandve et al., 2013)⁠, we were able to establish six criteria that lead to a successful reproducible paper. Those six criteria pertain to data availability, code availability, the use of open source software, correct execution of the code, code annotations and reproducibility of results (Fig. \@ref(fig:score-sheet)). Based on these criteria we assigned scores to selected papers in order to measure how reproducible each paper was. Each criterion was rated on a scale of 2 points, for a grand total of 12 points, with 12 indicating an impeccable reproducibility standard and 0 indicating complete lack of reproducibility. We detail the scoring procedure for each criterion below. Although our focus was on the field of Movement Ecology and particularly animal behavior identification, it is important to note that our criteria are of general purpose. Any scientist seeking to make or evaluate reproducibility in research can easily adopt our workflow on other scientific works.
 
+```{r score-sheet, fig.cap = "A conceptual framework for reproducible research used for scoring scientific papers. The score for reproducibility of results was calculated based on the proportion of results reproduced. For example, if 2 out of 4 tables, figures or paragraphs (i.e. numerical results within paragraphs) presented were successfully reproduced, the score would be : (2/4)×2=1 pt."}
 
-![Figure 2-1: A conceptual framework for reproducible research used for scoring scientific papers. The score for reproducibility of results was calculated based on the proportion of results reproduced. For example, if 2 out of 4 tables, figures or paragraphs (i.e. numerical results within paragraphs) presented were successfully reproduced, the score would be : (2/4)×2=1 pt.](/home/jenicca/Desktop/Jenicca/UF/MSc Project/Paper_to publish/Reproducibility-Workflow/Workflow revised.png)
+knitr::include_graphics("Workflow_revised.png")
+
+```
+
 
 ### Availability of Data and Code
-Any analytical process starts with data (Figure 2-1). Adopting a reproducible workflow starts with making data and computational code available to the audience to demonstrate the decisions made to generate results. Compared to Archmiller et al. (2020)⁠, where they assigned scores only to the reproduced result, in this study we allocated points to papers for data and code availability. Data sharing is the very first step towards reproducibility and should be rewarded.
+
+Any analytical process starts with data (Fig. \@ref(fig:repro-scores)). Adopting a reproducible workflow starts with making data and computational code available to the audience to demonstrate the decisions made to generate results. Compared to Archmiller et al. (2020)⁠, where they assigned scores only to the reproduced result, in this study we allocated points to papers for data and code availability. Data sharing is the very first step towards reproducibility and should be rewarded.
 
 Therefore, once we had our selection of papers, we investigated whether each paper had their data and code shared online. If so, we downloaded the data and code together with any ancillary information available. In the event where data and code were not readily accessible, we applied the same procedure applied in earlier reproducibility studies (Archmiller et al., 2020)⁠: we emailed requests to the corresponding authors, with up to two reminders after two weeks respectively in the absence of response. We were transparent regarding our request for the data and code: our email explained the aim of our study and guaranteed that their identity, paper and data would be kept confidential. If data were available online, a score of 2 was allocated to the paper, if authors had to be contacted to procure the data, a score of 1 was allocated. A score of 0 was allocated if no data were provided or we did not receive any response to our requests after our established deadline. The same scoring approach was applied to the availability of code. Data availability in itself does not ensure the successful reproducibility of a paper (Culina et al., 2020)⁠.  Similar to data availability, we considered code to be accessible online if they were archived in such a way that they could be readily accessed by anyone. We thus also allocated scores if code were provided along with the data online (score = 2) or upon request (score = 1).
 
 
 ### Use of Open Source Software
+
 We also included the use of open source software as a criterion given that for a study to be reproducible we need to be able to freely access any software used during an analysis. We only considered studies that used R and therefore, every study were attributed a score of 2 for making use of open source software. This workflow is meant for any code-based analysis and there are numeral other open source software available. Papers are allocated points for using open source software irrespective or whether they provided data and code.
 
 
 ### Code Annotation
+
 Computer code provided alongside research papers have proved to be crucial in reproducing results (Culina et al., 2020)⁠. However without proper comments, it may be hard to interpret how the code accomplishes specific tasks and better understand the analysis (Obels et al., 2020)⁠. Proper annotations also allows researchers to re-use and adjust the code according to their needs. An approach to address this matter is through detailed code annotations interposed across the computational code, also known as literate programming (Knuth, 1984; Sandve et al., 2013)⁠. Thus, 2 points were earned if the code were properly annotated or proper additional documentations were provided for a smooth understanding of the computational code. A score of 0 was allocated if the script consisted only of computer code, with no comments to help understand what each specific task accomplishes.
 
 
 ### Code Execution
+
 We next looked at how smoothly we could run the code provided and obtain results. A score of 2 was allocated to the paper if the code were complete and that we were able to run the code as is from start to end without any alteration. A score of 1 was allocated if the code were incomplete and additional code had to be written to obtain some results. For example, if some additional data cleaning were required or if some coding lines required alterations after running into errors. A score of 0 was attributed in cases where we ran into errors that could not be fixed and the authors were unresponsive to our call for help. For example, outdated packages that would not run anymore and no proper guidance were given as a work around, or runtime errors that we attempted to fix to the best of our knowledge but did not lead to similar results.
 
 ### Results Reproducibility
+
 Like in Archmiller et al. 2020, we evaluated reproducibility in 2 ways. Firstly, whether numerical results cited in the text and tables matched the values stemming from our reproduction attempts (we allowed for differences within the publication’s significant digit). Secondly, whether our reproduced figures matched the original figures presented in the paper while allowing for differences in the formatting of figures as well.
 
 The scores to results reproducibility were attributed based on the proportion of results reproduced in the form of numbers and figures. The score was calculated by: 
@@ -115,25 +162,20 @@ The scores to results reproducibility were attributed based on the proportion of
 $Number of results successfully reproduced/ Total number of results presented in the form of paragraphs, figures and tables X 2
 
 
-# RESULTS
+## Results
+
 We selected 75 eligible publications. Only three of these articles contained sufficient information for us to locate both data and code online without the need to contact the authors (2 points for data and another 2 points for code). An additional 11 studies had only their data available online. We thus subsequently emailed 72 authors requesting for data and/or code used in their studies. Three authors responded with the requested material (1 point for each of data and code provided). All others got 0 point on data and code. One author responded asking us to contact someone else who worked on the paper for the data and code, however we had no further response from the other author. Authors of 6 studies opted out for two different reasons: the data were to remain confidential (n=2) and they did not have enough time to compile the data and code (n=4). Furthermore authors of 7 papers consented to sending their data and code but failed to do so before our established deadline of February 16th. We also had no responses from 35 authors and 15 of our emails returned with undeliverable notes. In some cases we were unable to locate data and code; some papers indicated where the data were situated but we could not find them in those locations (n=3). Others papers made use of several datasets and pointed out several sources where they could be found, however it was difficult to identify the correct dataset used and the authors did not respond to any of our requests (n=2). Ultimately we were able to obtain data for 16 out of the 75 publications, from which only 6 provided code.
 
-No reviewed paper obtained a perfect score of 12 based on our proposed scale. Four papers had reproducibility scores greater or equal to 9, reflecting a high level of reproducibility (Figure 3-2). Twelve had reproducibility score between 4 and 9 that reflected at least some reproducibility (Figure 3-2). Fifty-nine of the 75 studies were considered not reproducible with reproducibility scores lower than 4 (Figure 3-2). As a matter of fact, those studies obtained only 2 points for making use of open source software, namely R, which was a selection criterion to start with.
+No reviewed paper obtained a perfect score of 12 based on our proposed scale. Four papers had reproducibility scores greater or equal to 9, reflecting a high level of reproducibility (Fig. \@ref(fig:repro-scores)). Twelve had reproducibility score between 4 and 9 that reflected at least some reproducibility (Fig. \@ref(fig:repro-scores)). Fifty-nine of the 75 studies were considered not reproducible with reproducibility scores lower than 4 (Fig. \@ref(fig:repro-scores)). As a matter of fact, those studies obtained only 2 points for making use of open source software, namely R, which was a selection criterion to start with.
 
-Of the 12 studies that were least reproducible (i.e., reproducibility scores between 4 and 9), we determined that those studies did not provide enough material regarding the analysis to reproduce the results presented in the respective papers. Ten of the 12 studies did not provide any computational code, and only scored 4 points for data and use of open source software (Figure 3-3). Of the remaining two studies in this category (Figure 3-2: BCPA 01 and HMM 01), one study lost points for making the data and code available upon request only, and not online. Moreover, the code were incomplete and poorly annotated and we were therefore unable to reproduce the results presented in the paper to its full extent. The second study lost points due to the fact that despite making their code available, we were unable to execute the code and obtain similar numerical results. We suspect that the analysis code made use of an outdated version of an R package, but package versions were not documented so we can only speculate.
+Of the 12 studies that were least reproducible (i.e., reproducibility scores between 4 and 9), we determined that those studies did not provide enough material regarding the analysis to reproduce the results presented in the respective papers. Ten of the 12 studies did not provide any computational code, and only scored 4 points for data and use of open source software (Fig. \@ref(fig:repro-papers)). Of the remaining two studies in this category (Fig. \@ref(fig:repro-papers): BCPA 01 and HMM 01), one study lost points for making the data and code available upon request only, and not online. Moreover, the code were incomplete and poorly annotated and we were therefore unable to reproduce the results presented in the paper to its full extent. The second study lost points due to the fact that despite making their code available, we were unable to execute the code and obtain similar numerical results. We suspect that the analysis code made use of an outdated version of an R package, but package versions were not documented so we can only speculate.
 
 
-``` {r echo = FALSE, warning = FALSE, message= FALSE}
-library(knitr)
-library(readr)
-library(ggplot2)
+```{r repro-scores, out.width = "50%", fig.cap = "Classification of the 75 selected papers according their reproducibility scores. Studies with a score ≥ 9 were considered as highly reproducible. Studies with a score ≥  4 and < 9 were considered to reflect at least some reproducibility. Studies with a score < 4 were considered not reproducible."}
+
 library(tidyverse)
-opts_chunk$set(fig.lp = " ")
-```
 
-```{r Figure 3-1: ,fig.width=10, fig.height=8,fig.cap= "Figure 3-1: Classification of the 75 selected papers according their reproducibility scores. Studies with a score ≥ 9 were considered as highly reproducible. Studies with a score ≥  4 and < 9 were considered to reflect at least some reproducibility. Studies with a score < 4 were considered not reproducible.", echo=FALSE,warning = FALSE, message= FALSE}
-
-histo <- read.csv(url("https://raw.githubusercontent.com/Jenicca/Reproducibility-Workflow/main/histogram_classes%20of%20scores_jp.csv"), header = T )
+histo <- read_csv("Histogram_classes_of_scores.csv")
 
 ggplot(histo, aes(x=reorder(Class, desc(Score)), y= Score)) + 
   geom_bar(stat = "identity", width=0.3, fill="skyblue3") +
@@ -144,43 +186,26 @@ ggplot(histo, aes(x=reorder(Class, desc(Score)), y= Score)) +
     axis.text = element_text(size = 18)) +
   scale_y_continuous(limits=c(0,60))+
   xlab("")+
-  ylab("Number of Papers")
-```
-
-Two studies were almost completely reproducible (Figure 3-2: HMM 02, HMM 04). Those studies made their data and code available online (Figure 3-3: HMM 02, HMM 04). The code were well annotated and we were able to reproduce the majority of the results. However we suspect that some lines of code were missing given that we failed to reproduce some of the figures presented in the paper. A third paper (Figure 3-2: BCPA03) was classified as highly reproducible with a score of 10. We were able to fully reproduce the numerical results and the code were well annotated (Figure 3-2: BCPA 03). However the paper did not make the data and code readily available online. A fourth study with a score of 9.0 was also classified as highly reproducible (Figure 3-2: EMH 01). We were able to fully reproduce the numerical results, however the code were poorly annotated and we had to discern the corresponding computational lines with some help from the authors (Figure 3-2: EMH 01).
-
-
-```{r, echo = F,warning = FALSE, message= FALSE}
-
-library(tidyverse)
-library(viridis)
-library(patchwork)
-library(fmsb)
-library(colormap)
-library(gridExtra)
-library(knitr)
-library(readr)
-opts_chunk$set(fig.lp = ' ')
+    ylab("Number of Papers")
 
 ```
 
-```{r ,fig.width=10, fig.height=8, fig.cap ="Figure 3-2: Total and detailed scores of 8 papers with available data for each reproducibility criteria. Each criterion was scored based on a discrete scale {0,1,2}. For the exception of Numerical Reproducibility which was scored based on a continuous scale ranging between 1 and 2. The plots are color-coded based on each respective paper total reproducibility scores.", echo = FALSE,warning = FALSE, message= FALSE}
+Two studies were almost completely reproducible (Fig. \@ref(fig:repro-papers): HMM 02, HMM 04). Those studies made their data and code available online (Fig. \@ref(fig:repro-papers): HMM 02, HMM 04). The code were well annotated and we were able to reproduce the majority of the results. However we suspect that some lines of code were missing given that we failed to reproduce some of the figures presented in the paper. A third paper (Fig. \@ref(fig:repro-papers): BCPA03) was classified as highly reproducible with a score of 10. We were able to fully reproduce the numerical results and the code were well annotated (Fig. \@ref(fig:repro-papers): BCPA 03). However the paper did not make the data and code readily available online. A fourth study with a score of 9.0 was also classified as highly reproducible (Fig. \@ref(fig:repro-papers): EMH 01). We were able to fully reproduce the numerical results, however the code were poorly annotated and we had to discern the corresponding computational lines with some help from the authors (Fig. \@ref(fig:repro-papers): EMH 01).
 
+```{r repro-papers, fig.show = "hold", out.width = "24%", fig.cap = "Total and detailed scores of 8 papers with available data for each reproducibility criteria. Each criterion was scored based on a discrete scale {0,1,2}. For the exception of Numerical Reproducibility which was scored based on a continuous scale ranging between 1 and 2. The plots are color-coded based on each respective paper total reproducibility scores. A: Data Availability, B: Code Availability, C: Code Annotation, D: Code Execution, E: Open Source Software, F: Results Reproducibility"}
 
-library(tidyverse)
 library(viridis)
 library(patchwork)
 library(fmsb)
 library(colormap)
 library(gridExtra)
 
-
-##Reading in the Data
-Radar.data <- read.csv(url("https://raw.githubusercontent.com/Jenicca/Reproducibility-Workflow/main/Scores_JP.csv"), header = T )
+## Reading in the Data
+Radar_data <- read_csv("Scores.csv")
 
 # If none of the papers scored the min or max scores then
 # To use the fmsb package, I have to add 2 lines to the dataframe: the max and min of each topic to show on the plot!
-Radar.data <-rbind(rep(2,7) , rep(0,7),Radar.data)
+Radar_data <- rbind(rep(2,7), rep(0,7), Radar_data)
 
 # Prepare colors
 
@@ -197,15 +222,15 @@ CBJ <- c("#4401544c","#43377f4c", "#31668d4c", "#21908d4c",
          "#37b5784c", "#8fd5434c", "#fde7254c","#fde7254c")
 
 
-# Split the screen in 6 parts
-par(oma = c(0,1,1,1), mfrow = c(3, 4), mar=c(1.5,1.5,3.5,1.5))
+# Split the screen in 6 parts # Not necessary with 'fig.show="hold"'
+## par(oma = c(0,1,1,1), mfrow = c(3, 4), mar=c(1.5,1.5,3.5,1.5))
 
 # Loop for each plot
 
 for(i in 1:8){
   
   # Custom the radarChart !
-  radarchart( Radar.data[c(1,2,i+2),2:7], axistype=1, 
+  radarchart( Radar_data[c(1,2,i+2),2:7], axistype=1, 
               
               #custom polygon
               pcol= CJ[i] , pfcol= CBJ[i] , plwd=4, plty=1 , seg = 2,
@@ -217,23 +242,23 @@ for(i in 1:8){
               vlcex= 1.5 , vlabels = c("A","F","E","D","C","B"),
               
               #title
-              title= Radar.data$Paper[i+2]  , cex.main = 2
+              title= Radar_data$Paper[i+2]  , cex.main = 2
   )
   
 }
 
-names <- c("A - Data Availability","B - Code Availability", "C - Code Annotation","D - Code Execution",
-           "E - Open Source Software","F - Results Reproducibility")
-par(oma = c(0,1,0,1), mar=c(0,1.5,3.5,1.5),new=TRUE)
-plot(NULL ,xaxt='n',yaxt='n',bty='n',ylab='',xlab='', xlim=0:1, ylim=0:1)
-legend(x= -4,y=1, legend = names, 
-       cex = 2, bty = 'n',xpd= "NA", ncol=3 , x.intersp = 1, text.width = 1.5)
-
+## names <- c("A - Data Availability","B - Code Availability", "C - Code Annotation","D - Code Execution",
+##            "E - Open Source Software","F - Results Reproducibility")
+## par(oma = c(0,1,0,1), mar=c(0,1.5,3.5,1.5),new=TRUE)
+## plot(NULL ,xaxt="n",yaxt="n",bty="n",ylab="",xlab="", xlim=0:1, ylim=0:1)
+## legend(x= -4,y=1, legend = names, 
+##        cex = 2, bty = "n",xpd= "NA", ncol=3 , x.intersp = 1, text.width = 1.5)
 
 ```
 
 
-# DISCUSSIONS
+## Discussion
+
 The main goal of this study was to provide insight on the extent to which reproducibility is practiced in Movement Ecology. In order to do so, we put forward a workflow based on six criteria that constitute the basis for reproducible research. On a scale from 0 (irreproducible) to 12 (full reproducibility), 59 papers (79%) obtained a score of 2 only, and 16 papers, for which we were able to gather data, obtained scores ranging from 4.0 to 10.2. The workflow we presented can be easily used by scientists as guidance to quantify and evaluate how reproducible their papers are before publishing. It can easily be integrated with ecologists’ workflows, provide support for open reproducible research and boost reproducibility in Movement Ecology. The message from this study is clear: the reproducibility of studies in the sub-field of Movement Ecology is low. Despite that we did not assess the reproducibility of studies across the every sub-field of Movement Ecology, this study provided us with some insight on what might be transpiring across the entire field.
 
 A pattern that characterized the high scoring papers was authors making both data and code readily available online. This seems obvious, but to be re-used, data need to first be found and accessed. Reproducibility starts with open data, one of the basic notions that embodies open science. The latter is a movement that aims at increasing the transparency and accessibility of scientific research through a set of practices (van der Zee & Reich, 2018). Open science encompasses three core concepts: open access, i.e. providing immediate unrestricted access to research articles for re-use (Björk et al., 2014; Swan et al., 2015); open data, whereby researchers make their data freely available to the scientific community (Michener, 2015); and open source, where computational code and software are made freely available to everyone who want to use, change and enhance it (Stodden et al., 2013).
