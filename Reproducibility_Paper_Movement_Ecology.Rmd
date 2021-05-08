@@ -22,6 +22,7 @@ output:                         # Let's be explicit with parameters
     code_download: true
     self_contained: true
     theme: flatly
+mainfont: Caladea
 ---
 
 
