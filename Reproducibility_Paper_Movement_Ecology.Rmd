@@ -1,12 +1,12 @@
 ---
-title: 'A glimpse into the reproducibility of scientific papers in Movement Ecology: How are we doing?'
+title: 'Assessing the reproducibility of scientific papers in Movement Ecology'
 author:
   - Jenicca Poongavanan^[University of Florida, jpoongavanan@ufl.edu]
-  - Rocio Joo Arakawa
+  - Rocío Joo
   - Victoria Jane Goodall
   - Scoot K Robinson
   - Mathieu Basille^[University of Florida, basille@ufl.edu]
-date: "4/21/2021"
+date: "7/29/2021"
 output:                         # Let's be explicit with parameters
   bookdown::pdf_document2:
     toc: true
@@ -70,7 +70,7 @@ library("gridExtra")
 #### Background
 
 Reproducibility is the earmark of science and thus Movement Ecology as
-well. However, studies in disciplines such as biology and geosciences have shown
+well. However, studies in disciplines such as biology and geoscience have shown
 that published work is rarely reproducible. Ensuring reproducibility is not a
 mandatory part of the research process and thus there are no clear procedures in
 place to assess the reproducibility of scientific articles.
@@ -81,15 +81,16 @@ In this study we put forward a reproducibility workflow scoring sheet based on
 six criteria that lead to successful reproducible papers. The reproducibility
 workflow can be used by authors to evaluate the reproducibility of their studies
 before publication and reviewers to evaluate the reproducibility of scientific
-papers. To assess the state of reproducibility in Movement Ecology, we attempted
-to reproduce the results from Movement Ecology papers that use behavioral
-pattern identification methods. We selected 75 papers published in several
-journals from 2010-2020.
+papers. As an example and to get a glimpse on the state of reproducibility in
+Movement Ecology, we attempted to reproduce the results from Movement Ecology
+papers that use behavioral pattern identification methods. We assessed 75 papers
+published from 2010-2020.
 
 #### Results
 
 According to our proposed reproducibility workflow, sixteen studies reflected at
-least some reproducibility (scores ≥ 4). In particular, we were only able to
+least some level of reproducibility because either data or codes were available
+(scores ≥ 4; scores ranged from 0 to 12). In particular, we were only able to
 obtain the data for 16 out of 75 papers. Out of these, a minority of papers also
 provided code with the data (6 out of the 16 studies). Out of the 6 studies that
 made both data and code available, only four studies reflected a high level of
@@ -97,11 +98,16 @@ reproducibility (scores ≥ 9) owing it to good code annotation and execution.
 
 #### Conclusions
 
-Based on our findings, we proposed guidelines for authors, journals and academic
-institutions to enhance the state of reproducibility in Movement Ecology.
+Most of the assessed paper showed a low level of reproducibility. To enhance the
+state of reproducibility in Movement Ecology, we proposed guidelines for
+authors, and advocate for changes in policies in journals and academic
+institutions, to encourage authors to follow more transparent and reproducible
+practices.
+
+## Keywords (3 to 10)
 
 
-## Introduction
+## Background
 
 *Reproducibility* is a fundamental ingredient in scientific work as it allows
 researchers to review and re-run studies reported by other scientists. Across
@@ -218,7 +224,7 @@ evaluate reproducibility in science and 2) evaluate the reproducibility status
 in the sub-field of Movement Ecology.
 
 
-## Methodology
+## Methods
 
 ### Data Collection 
 
@@ -732,5 +738,7 @@ role in improving open science and reproducibility in research results. The goal
 with reproducibility is not to point out errors or point fingers at somebody’s
 hard work but to make sure as a scientific community we all grow together and
 stronger so as to leave a bullet proof legacy behind.
+
+## Conclusions
 
 
