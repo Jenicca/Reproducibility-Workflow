@@ -104,8 +104,10 @@ authors, and advocate for changes in policies in journals and academic
 institutions, to encourage authors to follow more transparent and reproducible
 practices.
 
-## Keywords (3 to 10)
+## Keywords 
 
+Movement ecology; reproducibility; behavioral identification; code sharing; 
+data sharing; open software; FAIR principles.
 
 ## Background
 
@@ -113,18 +115,19 @@ practices.
 researchers to review and re-run studies reported by other scientists. Across
 different scientific fields the term ‘reproducibility’ is often used
 interchangeably with the term ‘replicability’, which leads to confusion
-(National Academies of Sciences, Engineering and Medicine,
-2019). *Replicability* consists of a study arriving at the same scientific
-findings as another study by following the same experimental protocols and
-analytical methods but with new data (Barba, 2018)⁠, while reproducibility is
+(National Academies of Sciences, Engineering and Medicine, 2019).
+*Replicability* consists of a study arriving at the same scientific findings as
+another study by following the same experimental protocols and analytical
+methods but with new data (Barba, 2018)⁠, while reproducibility consists of
 obtaining the same results reported in a paper when using the same input data
 and computational steps to re-run the analysis (Patil et al., 2016)⁠. Kitzes et
 al. (2017)⁠ considers results to be computationally reproducible when an
 independent researcher is able to recreate key quantitative results using the
 same data and computational code (hereafter code). Generally, researchers can
-find it difficult to guarantee the replicability of their study but computation
-plays a big part in deriving results and can usually be the one thing that a
-researcher can guarantee about a study (Peng, 2015).
+find it difficult to guarantee the replicability of their study but, since
+computation plays a big part in deriving results, computational reproducibility
+could be the one thing that a researcher can guarantee about a study (Peng,
+2015).
 
 Researchers ought to publish reproducible work primarily to: 1) help strengthen
 scientific claims, 2) maintain public trust, and 3) empower the growth of future
@@ -139,7 +142,7 @@ those data when that has already been collected and discovered (Gandrud,
 and effort by building upon those established findings and therefore developing
 new ones. Further benefit with reproducibility is the increased transparency
 across the scientific publishing community. A scientific community that works in
-a transparent environment thrive together. At the same time, when unsound papers
+a transparent environment thrive together. On the other hand, when unsound papers
 are published, researchers will go forward building on faulty research, making
 use of the same approach or using the results to support their research. Unsound
 papers go unidentified due to our inability of reproducing those papers which
@@ -157,14 +160,16 @@ which the data were available (19 out of 74 studies). Even when data is
 available there is no guarantee that a study can be fully reproduced. For
 instance, a second issue is the availability of code underlying the research
 findings. A study by Culina et al. (2020) showed that code availability is
-alarmingly low in ecology; only 93 out of 346 assessed articles that were
+alarmingly low in ecology; only 93 out of 346 assessed articles were
 accompanied by code. Note that Culina et al. (2020) did not examine if the code
 were fully reproducible. Stodden et al. (2018) were able to reproduce the
 findings of 22 papers out of a sample of 89 published in the journal “Science”
 for which data and code were available. The state of reproducibility has also
 shown to differ between fields: in geoscience, reproducibility studies were able
 to reproduce 33 out of 41 studies (Gil et al., 2016)⁠; by contrast in clinical
-research, more than half of the 168 studies failed to be reproduced.⁠
+research, more than half of the 168 studies failed to be reproduced. 
+[comment]: <> (RJ: I'm wondering how many of these studies reviewed only 'new' papers)
+⁠
 
 Other than technical there are also cultural barriers for papers not to be
 published in a reproducible way (Reichman et al., 2011)⁠. Firstly, the credit
@@ -180,38 +185,34 @@ policies (Lewis et al., 2018)⁠. So people need to have confidence in published
 results. If their conclusions are misleading or simply incorrect, we risk time,
 resources and even our health in the pursuit of false leads.
 
-In this paper, we focus on reproducibility in Movement Ecology. Over recent
-decades technological advances brought about massive volumes of data to support
-scientific research (Hampton et al., 2013)⁠. In animal movement studies, we moved
-from Very-High-Frequency (VHF) telemetry tags to Geographical Positioning System
-(GPS) tags which enabled the collection of accurate and extensive relocation
-data (Cagnacci et al., 2010; Rocío Joo et al., 2020; Kays et al., 2015)⁠. This
-deluge of data in combination with widely accessible and affordable computing
-resources enabled scientists to address questions at larger and finer spatial
-and temporal scales. The needs to address those questions led to an ever
-increasing body of literature pertaining to the statistical modeling of animal
-movement which resulted in diverse ecological insights into animal behaviors
-(Morales et al., 2004; Patterson et al., 2017)⁠. Computational reproducibility is
-crucial to attain a standard of credible research results. However compared to
-other fields, the sub-field of Movement Ecology (specifically behavioral pattern
-identification studies) has given little attention to reproducibility.
+In Movement Ecology, the technological advances have enabled significant
+improvements in data collection, both in quality and quantity of movement data
+(Cagnacci et al., 2010; Rocío Joo et al., 2020; Kays et al., 2015)⁠. This deluge
+of data in combination with widely accessible and affordable computing resources
+enabled scientists to address questions at larger and finer spatial and temporal
+scales, and to an ever increasing body of literature pertaining to the
+statistical modeling of animal movement which resulted in diverse ecological
+insights into animal behaviors (Morales et al., 2004; Patterson et al., 2017)⁠.
+Computational reproducibility is crucial to attain a standard of credible
+research results. However, until now and to our knowledge, there have not been a
+systematic assessment of the state of reproducibility in the field.
 
 This study aims to address this gap by implementing a reproducibility study
 using previously published articles in Movement Ecology. We focused on a
 specific aspect of Movement Ecology, behavioral pattern identification, because
 1) behavioral pattern identification methods nowadays are very complex and
-highly computational and 2) I have an understanding of how behavioral
-identification methods operate. We also focused on articles that used R, as it
-is one of the most used open source software in Movement Ecology (Rocío Joo et
-al., 2020)⁠.  For a study to be reproducible, there are key criteria that need to
-be fulfilled (National Academies of Sciences, Engineering and Medicine, 2019;
-Piccolo & Frampton, 2016; Powers & Hampton, 2019; Sandve et al., 2013): We
-identified the following six criteria: data availability, code availability, the
-use of open source software, successful execution of the code, code annotation
-and reproducibility of numerical results. Based on those criteria, we put
-forward a conceptual workflow to successful reproducible research. The workflow
-is not only applicable to Movement Ecology but to any code-based analyses and is
-not only useful to authors but also to reviewers, who can easily assess the
+highly computational and 2) the coauthors of this work have an understanding of
+how behavioral identification methods operate. We also focused on articles that
+used R, as it is one of the most used open source software in Movement Ecology
+(Rocío Joo et al., 2020). For a study to be reproducible, we identified the
+following six criteria: data availability, code availability, the use of open
+source software, successful execution of the code, code annotation and
+reproducibility of numerical results (National Academies of Sciences,
+Engineering and Medicine, 2019; Piccolo & Frampton, 2016; Powers & Hampton,
+2019; Sandve et al., 2013). Based on those criteria, we put forward a conceptual
+workflow to successful reproducible research. The workflow is not only
+applicable to Movement Ecology but to any code-based analyses and is not only
+useful to authors but also to reviewers, who can easily assess the
 reproducibility of other studies.
 
 In contrast to other studies (Archmiller et al., 2020; Konkol et al., 2019;
@@ -221,7 +222,7 @@ that encompass most sections of the manuscript. We fully evaluate the
 reproducibility of 75 studies published between 2010 and 2020. Our goals are to
 1) establish a workflow that can be used as a tool by authors and reviewers to
 evaluate reproducibility in science and 2) evaluate the reproducibility status
-in the sub-field of Movement Ecology.
+in a sub-field of Movement Ecology, behavioral pattern identification. 
 
 
 ## Methods
