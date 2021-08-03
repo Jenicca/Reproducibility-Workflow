@@ -430,25 +430,25 @@ identify the correct dataset used and the authors did not respond to any of our
 requests (n=2). Ultimately we were able to obtain data for 16 out of the 75
 publications, from which only 6 provided code.
 
-No reviewed paper obtained a perfect score of 12 based on our proposed
-scale. Four papers had reproducibility scores greater or equal to 9, reflecting
-a high level of reproducibility (Fig. \@ref(fig:repro-scores)). Twelve had
+No reviewed paper obtained a perfect score of 12 based on our proposed scale.
+Four papers had reproducibility scores greater or equal to 9, reflecting a high
+level of reproducibility (Fig. \@ref(fig:repro-scores)). Twelve had
 reproducibility score between 4 and 9 that reflected at least some
-reproducibility (Fig. \@ref(fig:repro-scores)). Fifty-nine of the 75 studies
-were considered not reproducible with reproducibility scores lower than 4
-(Fig. \@ref(fig:repro-scores)). As a matter of fact, those studies obtained only
-2 points for making use of open source software, namely R, which was a selection
+reproducibility and will be henceforth called potentially reproducible (Fig.
+\@ref(fig:repro-scores)). Fifty-nine of the 75 studies were considered not
+reproducible with reproducibility scores lower than 4 (Fig.
+\@ref(fig:repro-scores)). As a matter of fact, those studies obtained only 2
+points for making use of open source software, namely R, which was a selection
 criterion to start with.
 
-Of the 12 studies that were least reproducible (i.e., reproducibility scores
-between 4 and 9), we determined that those studies did not provide enough
+None of the 12 studies that were potentially reproducible provided enough
 material regarding the analysis to reproduce the results presented in the
 respective papers. Ten of the 12 studies did not provide any computational code,
 and only scored 4 points for data and use of open source software
 (Fig. \@ref(fig:repro-papers)). Of the remaining two studies in this category
 (Fig. \@ref(fig:repro-papers): BCPA 01 and HMM 01), one study lost points for
 making the data and code available upon request only, and not online. Moreover,
-the code were incomplete and poorly annotated and we were therefore unable to
+the codes were incomplete and poorly annotated and we were therefore unable to
 reproduce the results presented in the paper to its full extent. The second
 study lost points due to the fact that despite making their code available, we
 were unable to execute the code and obtain similar numerical results. We suspect
@@ -456,7 +456,7 @@ that the analysis code made use of an outdated version of an R package, but
 package versions were not documented so we can only speculate.
 
 
-```{r repro-scores, out.width = "50%", fig.cap = "Classification of the 75 selected papers according their reproducibility scores. Studies with a score ≥ 9 were considered as highly reproducible. Studies with a score ≥  4 and < 9 were considered to reflect at least some reproducibility. Studies with a score < 4 were considered not reproducible."}
+```{r repro-scores, out.width = "50%", fig.cap = "Classification of the 75 selected papers according their reproducibility scores. Studies with a score ≥ 9 were considered as highly reproducible. Studies with a score ≥  4 and < 9 were considered potentially reproducible. Studies with a score < 4 were considered not reproducible."}
 
 library(tidyverse)
 
@@ -474,23 +474,24 @@ ggplot(histo, aes(x=reorder(Class, desc(Score)), y= Score)) +
     ylab("Number of Papers")
 
 ```
+[comment]: <> (RJ: Fix x-tick labels)
 
 Two studies were almost completely reproducible (Fig. \@ref(fig:repro-papers):
-HMM 02, HMM 04). Those studies made their data and code available online
-(Fig. \@ref(fig:repro-papers): HMM 02, HMM 04). The code were well annotated and
-we were able to reproduce the majority of the results. However we suspect that
-some lines of code were missing given that we failed to reproduce some of the
-figures presented in the paper. A third paper (Fig. \@ref(fig:repro-papers):
-BCPA03) was classified as highly reproducible with a score of 10. We were able
-to fully reproduce the numerical results and the code were well annotated
-(Fig. \@ref(fig:repro-papers): BCPA 03). However the paper did not make the data
-and code readily available online. A fourth study with a score of 9.0 was also
+HMM 02, HMM 04). Those studies made their data and code available online (Fig.
+\@ref(fig:repro-papers): HMM 02, HMM 04). The code were well annotated and we
+were able to reproduce the majority of the results. However we suspect that some
+lines of code were missing given that we failed to reproduce some of the figures
+presented in the paper. A third paper (Fig. \@ref(fig:repro-papers): BCPA03) was
+classified as highly reproducible with a score of 10.2. We were able to fully
+reproduce the numerical results and the codes were well annotated (Fig.
+\@ref(fig:repro-papers): BCPA 03). However the paper did not make the data and
+code readily available online. A fourth study with a score of 9.0 was also
 classified as highly reproducible (Fig. \@ref(fig:repro-papers): EMH 01). We
-were able to fully reproduce the numerical results, however the code were poorly
-annotated and we had to discern the corresponding computational lines with some
-help from the authors (Fig. \@ref(fig:repro-papers): EMH 01).
+were able to fully reproduce the numerical results, however the codes were
+poorly annotated and we had to discern the corresponding computational lines
+with some help from the authors (Fig. \@ref(fig:repro-papers): EMH 01).
 
-```{r repro-papers, fig.show = "hold", out.width = "24%", fig.cap = "Total and detailed scores of 8 papers with available data for each reproducibility criteria. Each criterion was scored based on a discrete scale {0,1,2}. For the exception of Numerical Reproducibility which was scored based on a continuous scale ranging between 1 and 2. The plots are color-coded based on each respective paper total reproducibility scores. A: Data Availability, B: Code Availability, C: Code Annotation, D: Code Execution, E: Open Source Software, F: Results Reproducibility"}
+```{r repro-papers, fig.show = "hold", out.width = "24%", fig.cap = "Total and detailed scores of 8 papers with available data for each reproducibility criteria. Each criterion was scored based on a discrete scale {0,1,2}, with the exception of Numerical Reproducibility which was scored based on a continuous scale ranging between 1 and 2. The plots are color-coded based on each respective paper total reproducibility scores. A: Data Availability, B: Code Availability, C: Code Annotation, D: Code Execution, E: Open Source Software, F: Results Reproducibility"}
 
 library(viridis)
 library(patchwork)
@@ -558,19 +559,21 @@ for(i in 1:8){
 ## Discussion
 
 The main goal of this study was to provide insight on the extent to which
-reproducibility is practiced in Movement Ecology. In order to do so, we put
-forward a workflow based on six criteria that constitute the basis for
-reproducible research. On a scale from 0 (irreproducible) to 12 (full
-reproducibility), 59 papers (79%) obtained a score of 2 only, and 16 papers, for
-which we were able to gather data, obtained scores ranging from 4.0 to 10.2. The
-workflow we presented can be easily used by scientists as guidance to quantify
-and evaluate how reproducible their papers are before publishing. It can easily
-be integrated with ecologists’ workflows, provide support for open reproducible
-research and boost reproducibility in Movement Ecology. The message from this
-study is clear: the reproducibility of studies in the sub-field of Movement
-Ecology is low. Despite that we did not assess the reproducibility of studies
-across the every sub-field of Movement Ecology, this study provided us with some
-insight on what might be transpiring across the entire field.
+reproducibility is practiced in Movement Ecology, by reviewing the subfield of
+behavioral ecology. In order to do so, we put forward a workflow based on six
+criteria that constitute the basis for reproducible research. On a scale from 0
+(irreproducible) to 12 (full reproducibility), 59 papers (79%) obtained a score
+of 2 only, and 16 papers, for which we were able to gather data, obtained scores
+ranging from 4.0 to 10.2. The workflow we presented can be easily used by
+scientists as guidance to quantify and evaluate how reproducible their papers
+are before publishing. It can easily be integrated with ecologists’ workflows,
+provide support for open reproducible research and boost reproducibility in
+Movement Ecology. The message from this study is clear: the reproducibility of
+studies in the sub-field of Movement Ecology is low. Despite that we did not
+assess the reproducibility of studies across the every sub-field of Movement
+Ecology, this study provided us with some insight on what might be transpiring
+across the entire field. We encourage movement ecologists to use the tools
+presented here to evaluate their own work.
 
 A pattern that characterized the high scoring papers was authors making both
 data and code readily available online. This seems obvious, but to be re-used,
@@ -590,7 +593,7 @@ Ideally, authors should provide their data following the FAIR principles
 unique Digital Object Identifiers (DOIs). DOIs are permanent identifiers, in the
 form of a unique string of numbers, letters and symbols, associated to an
 address on the web (a URL), which helps eliminate ambiguity among
-databases. Secondly data should be made accessible, as in open, free and
+databases. Secondly, data should be made accessible, as in open, free and
 available to the world. There are numerous web-based data archiving repositories
 available to ecologists where movement data can be archived at no or low
 cost. Thirdly, data should be interoperable; data should be available in such a
@@ -655,14 +658,15 @@ not be recorded after the fact but as you are going through it. Annotating code
 is a gift you do not only give to others but to yourself as well. Coming back to
 code after a long time and recall the decisions made at the time can be
 confusing. Annotations can save your future self time.  We also came across a
-software related issue. For instance, in one particular case, the package
-available for download was newer version of the indicated package in the
-analysis, and we obtained numerically different results. R is one of the most
-used software in Movement Ecology (Rocío Joo et al., 2020; Lai et al., 2019) and
-has a vibrant package ecosystem (Rocio Joo et al., 2020). R packages are
-constantly changing and becoming deprecated (Ellison, 2010). To ensure that a
-project can be recomputed again at another time or by someone else, the version
-of the software and packages used need to be appropriately documented.
+software related issue. For instance, in one particular case, a package
+necessary to the code execution had a more recent verseion available for
+download than the one used by the authors of the paper, and we obtained
+numerically different results. R is one of the most used software in Movement
+Ecology (Rocío Joo et al., 2020; Lai et al., 2019) and has a vibrant package
+ecosystem (Rocio Joo et al., 2020). R packages are constantly changing and
+becoming deprecated (Ellison, 2010). To ensure that a project can be recomputed
+again at another time or by someone else, the version of the software and
+packages used need to be appropriately documented.
 
 Every computer has its own unique computational environment, from the operating
 system being used to the versions of software packages installed (Piccolo &
@@ -699,6 +703,7 @@ practice of irreproducible research. As a matter of fact, the necessary tools
 are now all freely available as open source software, and there is ample
 documentation on the web to use them. Instead, we argue that the main challenge
 is more cultural than technical.
+[comment]: <> (RJ: Could you make sure that the word cultural does not sound discriminatory?)
 
 Publishing their research findings through scientific journals is one of the
 ultimate objectives of researchers. Thus, journals can have a substantial
@@ -725,19 +730,15 @@ experts examine submitted papers for potential shortcomings (Smith, 2006)⁠. Th
 field of Movement Ecology is becoming highly computational (Hampton et al.,
 2013) and providing data and code will help reviewers follow the decision making
 process and identify erroneous discoveries. For instance, a rigid review of data
-would have perhaps prevented an incident that happened in Canada. In early 2020,
-an article (Pennisi, 2020)⁠ that shocked the science community emerged; a
-well-known behavioral ecologist was accused of data manipulation. Following the
-incident, several scientific papers that used his data were retracted from
-prominent scientific journals. Mandating policies such as making data, code and
-documentations available during the peer review process can deter such ethical
-misconduct.
+would have perhaps prevented a recent incident in the ecological community. In
+early 2020, an article (Pennisi, 2020)⁠ that shocked the science community
+emerged; a well-known behavioral ecologist was accused of data manipulation.
+Following the incident, several scientific papers that used his data were
+retracted from prominent scientific journals. Mandating policies such as making
+data, code and documentations available during the peer review process can deter
+such ethical misconduct.
 
-Over the course of the study, I have learned that science should not be a
-race. Scientists are so much focused on publishing, that quantity has become
-more important than quality. Science is like a building, what is the use of a
-beautiful building if it is built on weak foundations? At the same time, the
-irony behind this reproducibility study is that in itself it is not fully
+The irony behind this reproducibility study is that in itself it is not fully
 reproducible. Data from the original studies that we collected during the review
 process are to be kept confidential and cannot be shared, as the goal of this
 work is not to denounce particular studies and scientists, but rather to
@@ -745,6 +746,7 @@ criticize and find commonalities in an entire field. Instead of the raw data, we
 can only provide a fully reproducible account of the statistics and figures
 presented in this study, in a GitHub repository (work in progress at
 https://github.com/Jenicca/Reproducibility-Workflow).
+[comment]: <> (RJ: What's our score?)
 
 In order to bring a more accountable and productive scientific culture, academic
 institutions, journals, funding organizations and policymakers can all play a
@@ -754,5 +756,9 @@ hard work but to make sure as a scientific community we all grow together and
 stronger so as to leave a bullet proof legacy behind.
 
 ## Conclusions
+
+[comment]: <> (RJ: We need a conclusion section for Movement Ecology)
+
+[comment]: <> (RJ: Add references)
 
 
