@@ -229,28 +229,29 @@ in a sub-field of Movement Ecology, behavioral pattern identification.
 
 ### Data Collection 
 
-To evaluate reproducibility in Movement Ecology, we first screened for some of
-the most popular methods used in Movement Ecology to identify animal behaviors
-(Table \@ref(tab:list-meth)). The list is not considered exhaustive but portrays
-methods used in behavioral pattern identification reviewed by Gurarie et
-al. (2016)⁠ and Bennison et al. (2018)⁠. To assess popularity of each method, we
-first identified the article that introduced the method in ecology. The sum of
-the number of citations of this paper ‘Google Scholar’ and ‘Web of Science’
-(collected by 2020-11-13; Table \@ref(tab:list-meth)) was used as a proxy of
-popularity of the method. Based on out popularity proxy, we shortlisted four
-methods as being the most popular: Hidden Markov models (HMM), Behavioral Change
-Point Analysis (BCPA), Expectation – Maximisation binary Clustering (EMbC) and
-First-Passage Time (FPT). We do not review those four methods but used them as a
-filter to obtain a random sample of relevant papers in Movement Ecology.
+To evaluate reproducibility, we first screened for some of the most popular
+methods used in Movement Ecology to identify animal behaviors (Table
+\@ref(tab:list-meth)). The list is not considered exhaustive but portrays
+methods used in behavioral pattern identification reviewed by Gurarie et al.
+(2016)⁠ and Bennison et al. (2018)⁠. To assess the prevalence of each method,
+i.e. how popular it was, we first identified the article that introduced each
+method in ecology. The total number of citations of each of these papers in
+‘Google Scholar’ and ‘Web of Science’ (collected by 2020-11-13; Table
+\@ref(tab:list-meth)) was used as a proxy of prevalence of the methods. Based on
+the prevalence proxy, we shortlisted four methods as being the most prevalent:
+Hidden Markov models (HMM), Behavioral Change Point Analysis (BCPA), Expectation
+– Maximisation binary Clustering (EMbC) and First-Passage Time (FPT). We did not
+review those four methods but used them as a filter to obtain a random sample of
+relevant papers in Movement Ecology.
 
-| Method | Paper introducing the method for behavioral identification in ecology | Year | Sum of the number of times cited in Google Scholar and Web of Science|
+| Method | Paper introducing the method for behavioral identification in ecology | Year | Total number of times cited in Google Scholar and Web of Science|
 | ----------- | ----------- | :------: | :-------:|
 | *First-Passage Time (FPT)* | Using first-passage time in the analysis of area-restricted search and habitat selection (Fauchald & Tveraa, 2003) | 2003 | 899
 | *Behavioral Change Point Analysis (BCPA)* |A novel method for identifying behavioral changes in animal movement data (Gurarie et al., 2009) | 2009 | 532
 | *Hidden Markov Model (HMM)* |Flexible and practical modeling of animal telemetry data: hidden Markov models and extensions (Langrock et al., 2012) | 2012 | 425
 |*Expected Maximization binary Clustering (EMbC)*|Expectation-Maximization binary Clustering for behavioral annotation (Garriga et al., 2016) |2016 | 132
 | K-means clustering | Quantitative classification and natural clustering of Caenorhabditis elegans behavioral phenotypes(Geng et al., 2003)| 2003| 123
-|Bayesian Partitioning Markov Models (BPMM)|1. Computing the likelihood of sequence segmentation under Markov modelling (Guéguen, 2009) <br> ⁠2. Segmentation by maximal predictive partitioning according to composition biases (Guéguen, 2001)| 2009  <br><br><br><br>    2001| 34 |
+|Bayesian Partitioning Markov Models (BPMM)|Computing the likelihood of sequence segmentation under Markov modelling (Guéguen, 2009) <br>  Segmentation by maximal predictive partitioning according to composition biases (Guéguen, 2001)| 2009,  <br><br><br><br>    2001| 34 |
 | Kernel Density| Time-in-area represents foraging activity in a wide-ranging pelagic forager (Warwick-Evans et al., 2015) | 2015 | 43|
 
 Table: (\#tab:list-meth) List of behavioral pattern identification methods
@@ -259,20 +260,21 @@ together with the number of times they have been cited on 'Google Scholar' and
 review are highlighted in italics.
 
 Once we determined the most cited methods, we used ‘Google Scholar’ and ‘Web of
-Science’ as search engines to search for eligible papers to be reviewed for the
+Science’ as search engines for eligible papers to be reviewed for the
 reproducibility analysis. To be eligible, these papers had to 1) use one of the
 four selected methods to identify animal behaviors, 2) use R to execute the
 analysis (the most popular open source software in ecology and Movement Ecology
 (Rocío Joo et al., 2020; Lai et al., 2019), and 3) have a publication date from
-within the last 10 years (2010-2020). The date criterion was set as a primary
-filter on both search engines. We considered that more recent papers would have
-a higher chance to be reproducible because: R and other open software that
-provides a reproducible environment have become very popular in the ecological
-community, data sharing platforms (Michener, 2015)⁠ and journal demands for
-sharing data are also recent (Stodden et al., 2013)⁠ and half of the selected
-methods have only been used for animal behavior studies for less than a
-decade. We ultimately selected 75 papers; they were published in 46 different
-journals.
+within 2010-2020. We considered that these recent papers would have a higher
+chance to be reproducible because, in the last decade, R and other open software
+that provides a reproducible environment have become very popular in the
+ecological community, data sharing platforms (Michener, 2015)⁠ and journal
+demands for sharing data are also recent (Stodden et al., 2013). Moreover, two
+out of four of the selected methods have only been used in animal behavior
+studies for less than a decade. We ultimately found 75 papers that followed the
+criteria described above; they were published in 46 different journals (see list
+of journals in Supp. Mat.)
+[comment]: <> (RJ: Should include list of journals)
 
 
 ### A Reproducibility Workflow
@@ -294,16 +296,19 @@ lack of reproducibility. We detail the scoring procedure for each criterion
 below. Although our focus was on the field of Movement Ecology and particularly
 animal behavior identification, it is important to note that our criteria are of
 general purpose. Any scientist seeking to make or evaluate reproducibility in
-research can easily adopt our workflow on other scientific works.
+research can easily adopt our workflow on other scientific work.
 
 ```{r score-sheet, fig.cap = "A conceptual framework for reproducible research used for scoring scientific papers. The score for reproducibility of results was calculated based on the proportion of results reproduced. For example, if 2 out of 4 tables, figures or paragraphs (i.e. numerical results within paragraphs) presented were successfully reproduced, the score would be : (2/4)×2=1 pt."}
 
 knitr::include_graphics("Workflow_revised.png")
 
 ```
+[comment]: <> (RJ: Please use the fig.alt option and add proper alt-text)
+[comment]: <> (RJ: Add to the Results repro box that points are [0,2], and
+add to the reproducibility score cloud that points are [0,12])
 
 
-### Availability of Data and Code
+#### Availability of Data and Code (2 points)
 
 Any analytical process starts with data (Fig. \@ref(fig:repro-scores)). Adopting
 a reproducible workflow starts with making data and computational code available
@@ -326,26 +331,24 @@ data were available online, a score of 2 was allocated to the paper, if authors
 had to be contacted to procure the data, a score of 1 was allocated. A score of
 0 was allocated if no data were provided or we did not receive any response to
 our requests after our established deadline. The same scoring approach was
-applied to the availability of code. Data availability in itself does not ensure
-the successful reproducibility of a paper (Culina et al., 2020)⁠.  Similar to
-data availability, we considered code to be accessible online if they were
-archived in such a way that they could be readily accessed by anyone. We thus
-also allocated scores if code were provided along with the data online (score =
-2) or upon request (score = 1).
+applied to the availability of code. Similar to data availability, we considered
+code to be accessible online if they were archived in such a way that they could
+be readily accessed by anyone. We thus also allocated scores if code were
+provided along with the data online (score = 2) or upon request (score = 1).
 
 
-### Use of Open Source Software
+#### Use of Open Source Software (2 points)
 
 We also included the use of open source software as a criterion given that for a
 study to be reproducible we need to be able to freely access any software used
 during an analysis. We only considered studies that used R and therefore, every
 study were attributed a score of 2 for making use of open source software. This
 workflow is meant for any code-based analysis and there are numeral other open
-source software available. Papers are allocated points for using open source
+source software available (e.g. python, Stan). Papers are allocated points for using open source
 software irrespective or whether they provided data and code.
 
 
-### Code Annotation
+#### Code Annotation (2 points)
 
 Computer code provided alongside research papers have proved to be crucial in
 reproducing results (Culina et al., 2020)⁠. However without proper comments, it
@@ -359,9 +362,11 @@ proper additional documentations were provided for a smooth understanding of the
 computational code. A score of 0 was allocated if the script consisted only of
 computer code, with no comments to help understand what each specific task
 accomplishes.
+[comment]: <> (RJ: A bit subjective, but I have no idea of how to make it less
+subjective. Are there any references on what is good code annotation?)
 
 
-### Code Execution
+#### Code Execution (2 points)
 
 We next looked at how smoothly we could run the code provided and obtain
 results. A score of 2 was allocated to the paper if the code were complete and
@@ -375,9 +380,14 @@ unresponsive to our call for help. For example, outdated packages that would not
 run anymore and no proper guidance were given as a work around, or runtime
 errors that we attempted to fix to the best of our knowledge but did not lead to
 similar results.
+[comment]: <> (RJ: You could mention that you'll discuss later some aspects of this, 
+like the fact that being able to run someone's code at some point in time, does
+not guarantees that you'll be able to run it two weeks after... that's where
+software containers like Dockers come into place)
 
 
-### Results Reproducibility
+
+#### Results Reproducibility (2 points)
 
 Like in Archmiller et al. 2020, we evaluated reproducibility in 2 ways. Firstly,
 whether numerical results cited in the text and tables matched the values
@@ -391,6 +401,7 @@ results reproduced in the form of numbers and figures. The score was calculated
 by:
 
 $$\mathrm{Score}_{\mathrm{results}} = \frac{\mathrm{Number~of~results~successfully~reproduced}}{\mathrm{Total~number~of~results~presented~in~the~form~of~paragraphs,~figures~and~tables}} \times 2$$
+
 
 
 ## Results
@@ -407,7 +418,9 @@ and code, however we had no further response from the other author. Authors of 6
 studies opted out for two different reasons: the data were to remain
 confidential (n=2) and they did not have enough time to compile the data and
 code (n=4). Furthermore authors of 7 papers consented to sending their data and
-code but failed to do so before our established deadline of February 16th. We
+code but failed to do so before our established deadline of February 16th [YEAR]. 
+[comment]: <> (RJ: What does that mean in terms of how much time you waited for them?)
+We
 also had no responses from 35 authors and 15 of our emails returned with
 undeliverable notes. In some cases we were unable to locate data and code; some
 papers indicated where the data were situated but we could not find them in
